@@ -1,7 +1,5 @@
-/**📌 Milestone 1: Mostrare la lista dei prodotti
+import { useState } from "react"
 
-
-1. Parti dall’array products fornito: */
 type Products = {
   id?: number,
   name: string,
@@ -24,6 +22,24 @@ function isProduct(data:unknown): data is Products {
   
 }
 
+/**📌 Milestone 2: Aggiungere prodotti al carrello
+ * 
+Aggiungi uno stato locale addedProducts (inizialmente un array vuoto) per rappresentare i prodotti nel carrello.
+Per ogni prodotto della lista, aggiungi un bottone "Aggiungi al carrello":
+Al click del bottone, usa una funzione addToCart per:
+Aggiungere il prodotto al carrello se non è già presente, con una proprietà quantity = 1.
+Se il prodotto è già nel carrello, ignora l’azione.
+Sotto alla lista dei prodotti, mostra una lista dei prodotti nel carrello se addedProducts contiene almeno un elemento.
+Per ogni prodotto nel carrello, mostra:
+Nome
+Prezzo
+Quantità
+
+Obiettivo: L’utente può aggiungere prodotti al carrello e vedere una lista dei prodotti aggiunti.
+ */
+function App() {
+
+  const [addedProducts , setAddedProducts] = useState<Products[]>([])
 
    const products: Products[]  = [
    { name: 'Mela', price: 0.5 },
@@ -31,16 +47,6 @@ function isProduct(data:unknown): data is Products {
    { name: 'Latte', price: 1.0 },
    { name: 'Pasta', price: 0.7 },
    ]
-/*
-   Crea un componente che mostra la lista dei prodotti.
-   Per ogni prodotto, mostra:
-   Nome
-   Prezzo
-
-Obiettivo: Vedere un elenco leggibile di tutti i prodotti con nome e prezzo.
-*/
-function App() {
-  
 
   return (
     <div className="container my-4">
