@@ -2,7 +2,28 @@
 
 
 1. Parti dall’array products fornito: */
-   const products = [
+type Products = {
+  name: string,
+  price: number
+
+}
+
+function isProduct(data:unknown): data is Products {
+  if(
+    data && typeof data === "object" &&
+    "name" in data && typeof data.name === "string" &&
+    "price" in data && typeof data.price === "number" 
+
+  ){
+    return true
+  }else{
+    return false
+  }
+  
+}
+
+
+   const products: Products[]  = [
    { name: 'Mela', price: 0.5 },
    { name: 'Pane', price: 1.2 },
    { name: 'Latte', price: 1.0 },
