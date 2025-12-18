@@ -88,6 +88,20 @@ function App() {
       </ul>
     </div>
   </div>
+  <div className="row justify-content-center">
+     <div className="col-12 col-md-8 my-5">
+      <h3>Il tuo carrello</h3>
+      {addedProducts.length > 0 && addedProducts ?  (addedProducts.map(a => {
+        return (
+          <div className="col-5 my-5">
+            <p>Prodotto: {a.name}</p>
+            <p>Prezzo: {a.price}£</p>
+            <p>Quantità: {a.quantity}</p>
+          </div>
+        )
+      }) ) : (<h3>il tuo carrello è vuoto</h3>)}
+     </div>
+  </div>
 </div>
 
   )
