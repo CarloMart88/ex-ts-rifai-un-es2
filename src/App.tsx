@@ -4,8 +4,12 @@ type Products = {
   id?: number,
   name: string,
   price: number,
-  quantity?:number
 
+
+}
+
+type CartProduct = Products & {
+  quantity: number
 }
 
 function isProduct(data:unknown): data is Products {
@@ -13,7 +17,6 @@ function isProduct(data:unknown): data is Products {
     data && typeof data === "object" &&
     "name" in data && typeof data.name === "string" &&
     "price" in data && typeof data.price === "number" &&
-    "id" in data && typeof data.id === "number" &&
     "quantity" in data && typeof data.quantity === "number"
 
   ){
@@ -41,7 +44,7 @@ Obiettivo: L’utente può aggiungere prodotti al carrello e vedere una lista de
  */
 function App() {
 
-  const [addedProducts , setAddedProducts] = useState<Products[]>([])
+  const [addedProducts , setAddedProducts] = useState<CartProduct[]>([])
 
    const products: Products[]  = [
    { name: 'Mela', price: 0.5 },
@@ -50,8 +53,14 @@ function App() {
    { name: 'Pasta', price: 0.7 },
    ]
 
-  function addToCart(newValue:Products) {
-    return setAddedProducts(prev => [...prev ,{ ...newValue , quantity: 1}]) 
+  function addToCart(newValue:Products):void {
+    const product = addedProducts.some(a => a.name === newValue.name)
+    if(product){
+        setAddedProducts(prev => prev.map(p => p.name === newValue.name ? {...p , quantity: p.quantity + 1}: p)) 
+    }else{
+         setAddedProducts(prev => [...prev , {...newValue , quantity:1}])
+    }
+    
   }
 
   console.log(addedProducts)
