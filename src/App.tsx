@@ -26,22 +26,23 @@ function isProduct(data:unknown): data is Products {
   }
   
 }
+/**
+📌 Milestone 3: Modificare il carrello
+Al click successivo del bottone "Aggiungi al carrello", se il prodotto è già presente:
 
-/**📌 Milestone 2: Aggiungere prodotti al carrello
- * 
-Aggiungi uno stato locale addedProducts (inizialmente un array vuoto) per rappresentare i prodotti nel carrello.
-Per ogni prodotto della lista, aggiungi un bottone "Aggiungi al carrello":
-Al click del bottone, usa una funzione addToCart per:
-Aggiungere il prodotto al carrello se non è già presente, con una proprietà quantity = 1.
-Se il prodotto è già nel carrello, ignora l’azione.
-Sotto alla lista dei prodotti, mostra una lista dei prodotti nel carrello se addedProducts contiene almeno un elemento.
-Per ogni prodotto nel carrello, mostra:
-Nome
-Prezzo
-Quantità
+Usa una funzione updateProductQuantity per incrementare la proprietà quantity del prodotto esistente.
 
-Obiettivo: L’utente può aggiungere prodotti al carrello e vedere una lista dei prodotti aggiunti.
+Per ogni prodotto nel carrello, aggiungi un bottone "Rimuovi dal carrello":
+
+Al click, usa una funzione removeFromCart per rimuovere il prodotto dal carrello.
+
+Sotto alla lista del carrello, mostra il totale da pagare:
+
+Calcola il totale moltiplicando il prezzo per la quantità di ogni prodotto e somma tutti i risultati.
+
+Obiettivo: Gestire l’aggiunta, la rimozione e il calcolo del totale del carrello in modo dinamico.
  */
+
 function App() {
 
   const [addedProducts , setAddedProducts] = useState<CartProduct[]>([])
@@ -56,12 +57,24 @@ function App() {
   function addToCart(newValue:Products):void {
     const product = addedProducts.some(a => a.name === newValue.name)
     if(product){
-        setAddedProducts(prev => prev.map(p => p.name === newValue.name ? {...p , quantity: p.quantity + 1}: p)) 
+       updateProductQuantity(newValue)
     }else{
          setAddedProducts(prev => [...prev , {...newValue , quantity:1}])
     }
     
   }
+
+
+
+  //Usa una funzione updateProductQuantity per incrementare la proprietà quantity del prodotto esistente.
+
+  function updateProductQuantity(newValue:Products):void {
+    const product = addedProducts.some(a => a.name === newValue.name)
+    if(product){
+        setAddedProducts(prev => prev.map(p => p.name === newValue.name ? {...p , quantity: p.quantity + 1}: p)) 
+  }
+ }
+
 
   console.log(addedProducts)
 
