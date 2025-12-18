@@ -118,9 +118,9 @@ function App() {
   <div className="row justify-content-center">
      <div className="col-12 col-md-8 my-5">
       <h3>Il tuo carrello</h3>
-      {addedProducts.length > 0 && addedProducts ?  (addedProducts.map((a ) => {
+      {addedProducts.length > 0 && addedProducts ?  (addedProducts.map((a, index ) => {
         return (
-          <div className="col-5 my-5">
+          <div key={index} className="col-5 my-5">
             <p>Prodotto: {a.name}</p>
             <p>Prezzo: {a.price}£</p>
             <p>Quantità: {a.quantity}</p>
@@ -129,8 +129,8 @@ function App() {
         )
       }) ) : (<h3>il tuo carrello è vuoto</h3>)}
 
+      {addedProducts.length > 0 && addedProducts ? (<p>il tuo totale è {total}</p>) : (null)}
      </div>
-     <p>il tuo totale è {total}</p>
   </div>
 </div>
 
