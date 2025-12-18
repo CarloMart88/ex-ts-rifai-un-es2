@@ -68,7 +68,12 @@ function App() {
     
   }
 
+  const total = addedProducts.reduce((acc , val)=>{
+    return  acc + val.quantity * val.price
+    
+  },0).toFixed(2)
 
+  
 
   //Usa una funzione updateProductQuantity per incrementare la proprietà quantity del prodotto esistente.
 
@@ -123,7 +128,9 @@ function App() {
           </div>
         )
       }) ) : (<h3>il tuo carrello è vuoto</h3>)}
+
      </div>
+     <p>il tuo totale è {total}</p>
   </div>
 </div>
 
