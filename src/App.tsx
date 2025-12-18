@@ -3,7 +3,8 @@ import { useState } from "react"
 type Products = {
   id?: number,
   name: string,
-  price: number
+  price: number,
+  quantity?:number
 
 }
 
@@ -12,7 +13,8 @@ function isProduct(data:unknown): data is Products {
     data && typeof data === "object" &&
     "name" in data && typeof data.name === "string" &&
     "price" in data && typeof data.price === "number" &&
-    "id" in data && typeof data.id === "number" 
+    "id" in data && typeof data.id === "number" &&
+    "quantity" in data && typeof data.quantity === "number"
 
   ){
     return true
@@ -48,22 +50,29 @@ function App() {
    { name: 'Pasta', price: 0.7 },
    ]
 
+  function addToCart(newValue:Products) {
+    return setAddedProducts(prev => [...prev ,{ ...newValue , quantity: 1}]) 
+  }
+
+  console.log(addedProducts)
+
   return (
     <div className="container my-4">
   <div className="row justify-content-center">
     <div className="col-12 col-md-8">
       <ul className="list-group">
 
-        {products.map(p => (
-          <li key={p.id} className="list-group-item d-flex justify-content-between align-items-center">
+        {products.map((p , index) => (
+          <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
             <div>
               <strong>{p.name}</strong>
               <div className="text-muted small">Price: {p.price}£</div>
             </div>
 
-            <span className="badge bg-primary rounded-pill">
+            <span className="">
               £{p.price}
             </span>
+            <button className="btn btn-success" onClick={()=> addToCart(p)}>Aggiungi al carrello</button>
           </li>
         ))}
 
