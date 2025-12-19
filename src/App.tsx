@@ -127,7 +127,7 @@ function App() {
             <button className="btn btn-success" onClick={()=> removeFromCart(a)}>Rimuovi dal carrello</button>
           </div>
         )
-      }) ) : (<h3>il tuo carrello è vuoto</h3>)}
+      }) ) : (<h5>il tuo carrello è vuoto</h5>)}
 
       {addedProducts.length > 0 && addedProducts ? (<p>il tuo totale è {total}</p>) : (null)}
      </div>
